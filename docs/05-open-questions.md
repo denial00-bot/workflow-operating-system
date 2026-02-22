@@ -32,6 +32,27 @@ Diese Fragen sollten priorisiert und innerhalb der nächsten 2–4 Wochen entsch
 2. Welche Agentenaufgaben sind erlaubt, welche tabu?
 3. Welche KPIs werden verbindlich monatlich reviewed?
 
+## Frontend-Modernisierung (Aurelia v1 → v2)
+
+1. Welche 3–5 Module werden als erste Migrationswelle priorisiert?
+2. Welche Mindest-Testabdeckung ist Pflicht, bevor ein Modul migriert wird?
+3. Welche Architekturregeln sind „hart“ (blockierend im PR), welche „weich“ (Warnung)?
+4. Bis wann soll der Parallelbetrieb v1/v2 maximal laufen?
+
+## Dokumentations-Betriebsmodell
+
+1. Welche Inhalte sind verpflichtend „Repo-first“?
+2. Wer besitzt die Confluence-Übersichtsseiten fachlich?
+3. Welche Inhalte dürfen automatisiert aus dem Repo nach Confluence publiziert werden?
+4. Welche Review-Zyklen gelten für kritische Betriebsdokumente?
+
+## VS Code Agent Hooks (Preview)
+
+1. Welche konkreten Pilot-Use-Cases sind freigegeben?
+2. Welche Security-/Compliance-Kriterien müssen vor breiter Nutzung erfüllt sein?
+3. Welche Fallback-Prozesse gelten bei Hook-Ausfällen oder Breaking Changes?
+4. Wer entscheidet Go/No-Go für den Übergang von Pilot zu Standard?
+
 ## Entscheidungsvorlage (pro Frage)
 
 - Kontext

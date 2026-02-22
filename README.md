@@ -19,6 +19,10 @@ Ziel: Weniger Reibung, schnellere Releases, klare Standards für Mensch + AI-Age
 - [04 Workflow: Branching/PR/Release](docs/04-workflows/branching-pr-release.md)
 - [04 Workflow: Docs & Patchnotes Automation](docs/04-workflows/docs-and-patchnotes-automation.md)
 - [05 Offene Fragen](docs/05-open-questions.md)
+- [06 Framework-Modernisierung (Aurelia v1 → v2)](docs/06-framework-modernization-aurelia-v1-to-v2.md)
+- [07 Doku-Strategie (Confluence vs Repo)](docs/07-documentation-strategy-confluence-vs-repo.md)
+- [08 VS Code Hooks Outlook](docs/08-vscode-hooks-outlook.md)
+- [Company Profile (Arbeitsstand)](docs/company-profile.md)
 - [Roadmap (3 Wochen)](roadmap/implementation-plan-3-weeks.md)
 - Templates:
   - [AGENTS.template.md](templates/AGENTS.template.md)
