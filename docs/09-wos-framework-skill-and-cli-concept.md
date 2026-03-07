@@ -172,19 +172,41 @@ Ein **WOS Framework Toolkit** aus zwei Ebenen:
 
 ---
 
-## 8) Governance, Security, Quality
+## 8) Security, Governance, Quality & Doku-Betrieb
 
-## 8.1 Governance
+## 8.1 Security-by-default + Doku-Automation
+
+Policy-Text alleine reicht nicht; zentrale Regeln müssen als technische Gates erzwungen werden.
+
+### Branch-/Pipeline-Gates (Pflicht)
+- Kein Direct Push auf `main`.
+- Jeder Feature-Change läuft über PR + verpflichtende Pipeline.
+- Pflichtchecks:
+  - Build/Lint/Test
+  - Security-Checks (Dependency + Secrets)
+  - Docs-Gate (bei Service-/Moduländerungen muss passende Doku mitgezogen werden)
+
+### Agent-/Hook-gestützte Doku-Pflege
+- PR-Hook erkennt betroffene Bereiche (`services/**`, `modules/**`, `frontend/**`).
+- Wenn Doku fehlt: `docs-required` Label + failing check.
+- Optional: Auto-Draft von Doku-Updates als Vorschlag, aber kein Blind-Merge.
+
+### AGENTS.md Contract (minimal)
+- Jede Verhaltensänderung: Code + Tests + Doku im selben PR.
+- Bei fehlendem Kontext: Frage statt Annahme.
+- Security-sensitive Changes (`auth`, `proxy`, `openshift`) brauchen erhöhte Review-Stufe.
+
+## 8.2 Governance
 - Alle CLI-Operationen erzeugen maschinenlesbares Log
 - PR-Template Pflichtfelder: Impact, Tests, Rollback, Security
 - Agentenänderungen bleiben klein und reviewbar (<400 LoC Richtwert)
 
-## 8.2 Sicherheitsregeln
+## 8.3 Sicherheitsregeln
 - Keine Secrets in Repo (nur Secret-Referenzen)
 - JWT/Auth-Änderungen benötigen 2nd human review
 - OpenShift-konfigurationsänderungen nur über deklarative Files
 
-## 8.3 Qualitätsgates
+## 8.4 Qualitätsgates
 - Preflight: Schema + Config + route collision checks
 - Postflight: lint + tests + smoke checks
 - Contract checks bei API/Moduländerungen
@@ -243,7 +265,36 @@ Ein **WOS Framework Toolkit** aus zwei Ebenen:
 
 ---
 
-## 12) Annahmen (explizit)
+## 12) Shared Services Strategie (wichtig)
+
+Shared Services sind zentrale Querschnittsbausteine (z. B. Auth, Files, Jobs, Tile-Services), die von mehreren fachlichen Services/Modulen genutzt werden. Änderungen daran haben hohen Impact.
+
+### Klassifikation
+- **Domain Service**: fachschalenspezifisch, lokalere Auswirkungen
+- **Shared Service**: domänenübergreifend, hoher Kopplungs-/Regressionseinfluss
+
+### Regeln für Shared Services
+1. Versionierte Contracts (API/Schema/Event) sind Pflicht.
+2. Änderungen nur über kompatible Evolution (Deprecation statt Breaking-by-default).
+3. Consumer-Impact-Analyse vor Merge:
+   - Welche Services/Module konsumieren die Funktion?
+   - Welche Tests decken die Consumer ab?
+4. Erweiterte Testmatrix:
+   - Service-intern
+   - Consumer-Contract-Tests
+   - Integrations-Smoke über repräsentative Consumer
+5. Höhere Freigabeschwelle:
+   - mind. 2 Reviews
+   - obligatorischer Rollback-Plan
+
+### CLI/Skill-Unterstützung für Shared Services
+- `wosfw service doctor <shared-service>` zeigt Consumer-Liste + mögliche Impact-Zonen.
+- `wosfw test matrix <shared-service>` erweitert auf Consumer-Kontrakte.
+- Skill erzwingt bei Shared-Service-Änderungen automatisch plan-first + explizite Impact-Sektion.
+
+---
+
+## 13) Annahmen (explizit)
 
 - Service-Landschaft ist über eine Registry beschreibbar.
 - JWT/REST-Prinzipien sind als Framework-Baseline stabil.
@@ -252,7 +303,7 @@ Ein **WOS Framework Toolkit** aus zwei Ebenen:
 
 ---
 
-## 13) Iterationsentscheidungen (warum dieses Design)
+## 14) Iterationsentscheidungen (warum dieses Design)
 
 ### Iteration 1 — Optionen verglichen
 - **A:** Nur Skill (max. flexibel, aber wenig deterministisch)
@@ -273,7 +324,7 @@ Ein **WOS Framework Toolkit** aus zwei Ebenen:
 
 ---
 
-## 14) Konkrete Empfehlung
+## 15) Konkrete Empfehlung
 
 Start mit einem **MVP Toolkit**:
 
