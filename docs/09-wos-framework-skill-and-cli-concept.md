@@ -334,15 +334,3 @@ Start mit einem **MVP Toolkit**:
 4. Danach Modul-/Frontend-Automation ausbauen
 
 So entsteht schnell Wert, ohne die Betriebsstabilität zu riskieren.
-
----
-
-## Backlog für spätere Umsetzung (Subagents)
-
-1. **Proposal/Research Agent**
-   - Exposé-/Proposal-Iteration (Forschungsfragen, Methodik, Hypothesen)
-   - konsistente short/long-Versionen
-
-2. **Document Compiler Agent (TWBOOK/PDF)**
-   - standardisierte Renderpfade (twbook, lean/full, with/without ToC)
-   - automatische Format-Checks (Listen, Nummerierung, Cover, Metadaten)
